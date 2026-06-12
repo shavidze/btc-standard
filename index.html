@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ბიტკოინ სტანდარტი — ინტერაქტიული კურსი</title>
+<title>ბიტკოინ სტანდარტი — ინტერაქტიული კურსი ქართულად</title>
+<meta name="description" content="ფულის ისტორია და ბიტკოინის ეკონომიკა — 9 თავი, 57 გაკვეთილი, 72 საგამოცდო კითხვა. საიფედინ ამმუსის საერთაშორისო ბესტსელერზე დაფუძნებული უფასო ინტერაქტიული კურსი.">
+<meta property="og:title" content="ბიტკოინ სტანდარტი — ინტერაქტიული კურსი ქართულად">
+<meta property="og:description" content="9 თავი · 57 გაკვეთილი · 72 კითხვა — ფულის ისტორია და ბიტკოინის ეკონომიკა, უფასოდ.">
+<meta property="og:image" content="images/cover.webp">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23080d1a'/><text x='50' y='72' font-size='62' text-anchor='middle' fill='%23f0c75e' font-family='Georgia,serif' font-weight='bold'>₿</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@400;600;700;900&family=Noto+Sans+Georgian:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -53,10 +59,10 @@ header::after{
 .kicker::before{content:'';width:44px;height:1px;background:var(--gold)}
 h1.title{
   font-family:var(--serif);font-weight:900;font-size:clamp(38px,6vw,64px);
-  line-height:1.12;letter-spacing:-.01em;
+  line-height:1.28;letter-spacing:-.01em;
+  padding-bottom:.12em;margin-bottom:8px;
   background:linear-gradient(115deg,#f6e7bb 20%,var(--gold-hi) 45%,#9d7d2c 80%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  margin-bottom:20px;
 }
 .subtitle{font-size:18px;color:var(--muted);max-width:30em;margin-bottom:36px}
 .subtitle b{color:var(--ink);font-weight:500}
@@ -230,6 +236,35 @@ input[type=range]::-webkit-slider-thumb{
 footer{padding:50px 0 70px;text-align:center;color:#7e89a3;font-size:13px;border-top:1px solid rgba(201,161,59,.12);margin-top:40px}
 footer .coin{font-family:var(--serif);color:var(--gold);font-size:22px;margin-bottom:12px}
 
+/* ───── perceived value layer ───── */
+::selection{background:rgba(201,161,59,.35)}
+.hero-stats{display:flex;gap:34px;margin-bottom:34px}
+.hero-stats b{font-family:var(--serif);font-weight:900;font-size:27px;color:var(--gold-hi);display:block;line-height:1.15;font-variant-numeric:tabular-nums}
+.hero-stats span{font-size:12px;color:var(--muted);letter-spacing:.08em}
+.ch-card .meta{font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:.03em}
+.q-threshold{font-size:13px;color:var(--muted);letter-spacing:.06em;margin-bottom:16px}
+.q-threshold b{color:var(--gold-hi);font-weight:500}
+.q-letter{font-family:var(--serif);color:var(--gold);font-weight:700;margin-right:8px}
+.medal{position:relative;display:inline-flex;align-items:center;gap:18px;justify-content:center}
+.medal svg{width:54px;height:96px;opacity:0;transition:opacity .8s .4s}
+.medal.pass svg{opacity:1}
+.medal.pass .big{text-shadow:0 0 38px rgba(240,199,94,.55)}
+.q-badge{display:none;margin:14px auto 4px;font-family:var(--serif);font-size:15px;color:var(--gold-hi);letter-spacing:.04em;border:1px solid rgba(201,161,59,.45);border-radius:99px;padding:8px 22px;width:fit-content;background:rgba(201,161,59,.08)}
+#q-score{font-variant-numeric:tabular-nums}
+.sim-val{font-variant-numeric:tabular-nums;transition:color .35s}
+.sim-val.hit{color:var(--red)}
+.sim-presets{display:flex;gap:10px;margin-top:4px;flex-wrap:wrap}
+.sim-presets button{font-family:var(--sans);font-size:12.5px;cursor:pointer;color:var(--muted);background:rgba(18,26,48,.7);border:1px solid rgba(151,160,184,.3);border-radius:99px;padding:7px 15px;transition:all .2s}
+.sim-presets button:hover{color:var(--gold-hi);border-color:var(--gold)}
+.cert-box{display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;background:linear-gradient(135deg,rgba(201,161,59,.14),rgba(18,26,48,.9));border:1px solid var(--gold);border-radius:8px;padding:30px 38px;box-shadow:0 18px 60px rgba(201,161,59,.12)}
+.cert-box h3{font-family:var(--serif);font-size:24px;color:var(--gold-hi);margin-bottom:6px}
+.cert-box p{color:var(--muted);font-size:14.5px}
+.lesson-card p,.lesson-card li{max-width:64ch}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+
 /* reveal animation */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
 .reveal.in{opacity:1;transform:none}
@@ -256,15 +291,21 @@ footer .coin{font-family:var(--serif);color:var(--gold);font-size:22px;margin-bo
     <div>
       <div class="kicker">ინტერაქტიული კურსი · ქართულად</div>
       <h1 class="title">ბიტკოინ<br>სტანდარტი</h1>
-      <p class="subtitle">ისწავლე <b>ფულის ისტორია და ბიტკოინის ეკონომიკა</b> — საიფედინ ამმუსის წიგნზე დაფუძნებული გაკვეთილებით, ქვიზებითა და სიმულაციებით. უფასოდ, შენი ტემპით.</p>
-      <a class="cta" href="#chapters-sec">დაიწყე სწავლა →</a>
+      <p class="subtitle">ისწავლე <b>ფულის ისტორია და ბიტკოინის ეკონომიკა</b> — საიფედინ ამმუსის საერთაშორისო ბესტსელერზე დაფუძნებული გაკვეთილებით, გამოცდებითა და სიმულაციებით. უფასოდ, შენი ტემპით.</p>
+      <div class="hero-stats">
+        <div><b>9</b><span>თავი</span></div>
+        <div><b>57</b><span>გაკვეთილი</span></div>
+        <div><b>72</b><span>კითხვა</span></div>
+        <div><b>~6 სთ</b><span>სრული კურსი</span></div>
+      </div>
+      <a class="cta" href="#chapters-sec" id="cta-btn">დაიწყე სწავლა →</a>
       <div class="progress-pill">
         <span>შენი პროგრესი</span>
         <span class="bar"><i id="prog-bar"></i></span>
         <span id="prog-label">0%</span>
       </div>
     </div>
-    <div class="hero-art"><img src="images/cover.webp" alt="ბიტკოინ სტანდარტი"></div>
+    <div class="hero-art"><img src="images/cover.webp" alt="ბიტკოინ სტანდარტი" fetchpriority="high"></div>
   </div>
 </header>
 
@@ -273,6 +314,19 @@ footer .coin{font-family:var(--serif);color:var(--gold);font-size:22px;margin-bo
   <div class="wrap">
     <div class="sec-head"><span class="sec-num">I</span><h2 class="sec-title">თავები</h2></div>
     <div class="chapters" id="chapter-grid"></div>
+  </div>
+</section>
+
+<!-- ───────── certificate banner ───────── -->
+<section id="cert-banner" style="display:none;padding:0 0 30px">
+  <div class="wrap">
+    <div class="cert-box">
+      <div>
+        <h3>ცხრავე თავი ჩაბარებულია — კურსი დასრულებულია</h3>
+        <p>გადმოწერე სახელობითი სერტიფიკატი და გააზიარე.</p>
+      </div>
+      <button class="btn btn-gold" onclick="downloadCert()">სერტიფიკატის ჩამოტვირთვა</button>
+    </div>
   </div>
 </section>
 
@@ -294,6 +348,7 @@ footer .coin{font-family:var(--serif);color:var(--gold);font-size:22px;margin-bo
   <div class="wrap">
     <div class="sec-head"><span class="sec-num">✦</span><h2 class="sec-title" id="qv-title">გამოცდა</h2></div>
     <div class="lesson-card quiz-card">
+      <div class="q-threshold">გასავლელი ზღვარი: <b>6 / 8</b></div>
       <div class="q-progress" id="q-progress"></div>
       <div id="q-body">
         <div class="q-question" id="q-question"></div>
@@ -305,9 +360,14 @@ footer .coin{font-family:var(--serif);color:var(--gold);font-size:22px;margin-bo
         </div>
       </div>
       <div class="q-result" id="q-result">
-        <div class="big" id="q-score"></div>
+        <div class="medal" id="q-medal">
+          <svg viewBox="0 0 40 72" fill="none" stroke="#c9a13b" stroke-width="2"><path d="M30 4 C14 14 8 30 12 48 M12 48 l-8-4 M12 48 l1-9 M16 22 l-9-2 M16 22 l4-8 M12 34 l-9-3 M12 34 l3-9"/></svg>
+          <div class="big" id="q-score"></div>
+          <svg viewBox="0 0 40 72" fill="none" stroke="#c9a13b" stroke-width="2" style="transform:scaleX(-1)"><path d="M30 4 C14 14 8 30 12 48 M12 48 l-8-4 M12 48 l1-9 M16 22 l-9-2 M16 22 l4-8 M12 34 l-9-3 M12 34 l3-9"/></svg>
+        </div>
+        <div class="q-badge" id="q-badge"></div>
         <p id="q-verdict"></p>
-        <button class="btn btn-ghost" onclick="startQuiz()">თავიდან ცდა</button>
+        <button class="btn btn-ghost" id="q-retry" onclick="startQuiz()">თავიდან ცდა</button>
         <button class="btn btn-gold" id="q-onward"></button>
       </div>
     </div>
@@ -334,6 +394,11 @@ footer .coin{font-family:var(--serif);color:var(--gold);font-size:22px;margin-bo
             <label><span>წლების შემდეგ</span><b id="yrs-label">10 წელი</b></label>
             <input type="range" id="yrs" min="1" max="30" step="1" value="10">
           </div>
+          <div class="sim-presets">
+            <button onclick="setPreset(10)">🇬🇪 საქართველო ~10%</button>
+            <button onclick="setPreset(45)">🇹🇷 თურქეთი ~45%</button>
+            <button onclick="setPreset(3)">🇺🇸 აშშ ~3%</button>
+          </div>
         </div>
         <div class="sim-readout">
           <div class="banknote" id="banknote">1000 ₾</div>
@@ -348,8 +413,8 @@ footer .coin{font-family:var(--serif);color:var(--gold);font-size:22px;margin-bo
 
 <footer>
   <div class="coin">₿</div>
-  პროტოტიპი · დაფუძნებულია საიფედინ ამმუსის „ბიტკოინ სტანდარტზე"<br>
-  საგანმანათლებლო მიზნებისთვის
+  დაფუძნებულია საიფედინ ამმუსის საერთაშორისო ბესტსელერზე „ბიტკოინ სტანდარტი“ — თარგმნილია 30+ ენაზე<br>
+  ქართული ინტერაქტიული გამოცემა · საგანმანათლებლო მიზნებისთვის
 </footer>
 
 <script src="content.js"></script>
@@ -368,6 +433,8 @@ const CHAPTER_META=[
 ];
 const CONTENT=window.COURSE_CONTENT||{};
 const PASS=6; /* 8-დან */
+const ROMAN=['I','II','III','IV','V','VI','VII','VIII','IX'];
+const roman=n=>ROMAN[n-1]||n;
 
 /* ───────────── state ───────────── */
 const store={
@@ -387,6 +454,14 @@ function updateProgress(){
   const pct=total?Math.round(done/total*100):0;
   document.getElementById('prog-bar').style.width=pct+'%';
   document.getElementById('prog-label').textContent=pct+'%';
+  const cta=document.getElementById('cta-btn');
+  const last=+localStorage.getItem('bs_last_ch')||0;
+  if(done>0&&last&&CONTENT[last]){
+    cta.textContent=`გააგრძელე — თავი ${roman(last)}: ${CHAPTER_META[last-1].title} →`;
+    cta.onclick=e=>{e.preventDefault();openChapter(last,true)};
+  }
+  const allDone=Object.keys(CONTENT).every(ch=>store.chDone(+ch));
+  document.getElementById('cert-banner').style.display=allDone&&Object.keys(CONTENT).length===9?'block':'none';
   renderBadges();
 }
 
@@ -397,8 +472,9 @@ CHAPTER_META.forEach((c,idx)=>{
   const d=document.createElement('div');
   d.className='ch-card reveal'+(has?'':' locked');
   d.dataset.ch=n;
+  const meta=has?`<div class="meta">${CONTENT[n].lessons.length} გაკვეთილი · 8 კითხვა · ~25 წთ</div>`:'';
   d.innerHTML=`<img src="${c.img}" loading="lazy" alt="">
-    <div class="body"><div class="no">თავი ${String(n).padStart(2,'0')}</div><h3>${c.title}</h3></div>
+    <div class="body"><div class="no">თავი ${roman(n)}</div><h3>${c.title}</h3>${meta}</div>
     <span class="badge-slot"></span><span class="mini-prog"></span>`;
   if(has){
     d.onclick=()=>openChapter(n,true);
@@ -429,6 +505,7 @@ const nav=document.getElementById('lesson-nav');
 function openChapter(n,scroll){
   if(!CONTENT[n])return;
   curCh=n;
+  localStorage.setItem('bs_last_ch',n);
   const c=CONTENT[n];
   document.getElementById('lv-num').textContent='თავი '+n;
   document.getElementById('lv-title').textContent=CHAPTER_META[n-1].title;
@@ -493,10 +570,15 @@ function renderQ(){
   document.getElementById('q-next').style.display='none';
   const box=document.getElementById('q-opts');
   box.innerHTML='';
+  const letters=['ა','ბ','გ','დ'];
   const order=[0,1,2,3].map(v=>({v,r:Math.random()})).sort((a,b)=>a.r-b.r).map(o=>o.v);
-  order.forEach(i=>{
+  order.forEach((i,pos)=>{
     const b=document.createElement('button');
-    b.className='q-opt';b.textContent=q.opts[i];
+    b.className='q-opt';
+    const span=document.createElement('span');
+    span.className='q-letter';span.textContent=letters[pos]+')';
+    b.appendChild(span);
+    b.appendChild(document.createTextNode(q.opts[i]));
     b.dataset.orig=i;
     b.onclick=()=>answer(i,b);
     box.appendChild(b);
@@ -523,16 +605,32 @@ function showResult(){
   document.getElementById('q-body').style.display='none';
   const r=document.getElementById('q-result');
   r.style.display='block';
-  document.getElementById('q-score').textContent=`${qScore} / ${quiz.length}`;
+  const passed=qScore>=PASS;
+  document.getElementById('q-medal').classList.toggle('pass',passed);
+  /* count-up 0 → score */
+  const scoreEl=document.getElementById('q-score');
+  let cur=0;
+  scoreEl.textContent=`0 / ${quiz.length}`;
+  const tick=setInterval(()=>{
+    cur++;
+    scoreEl.textContent=`${cur} / ${quiz.length}`;
+    if(cur>=qScore)clearInterval(tick);
+  },90);
+  const badge=document.getElementById('q-badge');
+  if(passed){
+    badge.textContent=`თავი ${roman(curCh)} ჩაბარებულია — მონეტა №${curCh} შენს კოლექციაშია`;
+    badge.style.display='block';
+  }else badge.style.display='none';
+  document.getElementById('q-retry').style.display=qScore===quiz.length?'none':'inline-block';
   const v=document.getElementById('q-verdict');
-  v.textContent=qScore===quiz.length?'შესანიშნავია! მყარი ცოდნა გაქვს — სატოში იამაყებდა. 🏆'
-    :qScore>=PASS?'ძალიან კარგი! ეს თავი ათვისებულია.'
+  v.textContent=qScore===quiz.length?'უმაღლესი შედეგი — სატოში იამაყებდა.'
+    :passed?'ძალიან კარგი! ეს თავი ათვისებულია.'
     :qScore>=4?'კარგი დასაწყისია — გადაიკითხე გაკვეთილები და კიდევ სცადე.'
     :'ჯერ ადრეა — დაუბრუნდი გაკვეთილებს და თავიდან სცადე.';
   const onward=document.getElementById('q-onward');
   const next=curCh+1;
   if(CONTENT[next]){
-    onward.textContent=`თავი ${next}: ${CHAPTER_META[next-1].title} →`;
+    onward.textContent=`თავი ${roman(next)}: ${CHAPTER_META[next-1].title} →`;
     onward.onclick=()=>openChapter(next,true);
   }else{
     onward.textContent='სიმულაციაზე გადასვლა →';
@@ -555,15 +653,56 @@ function sim(){
   note.textContent=fmt(amt)+' ₾';
   note.style.transform=`scale(${.35+.65*ratio})`;
   note.style.opacity=.35+.65*ratio;
-  document.getElementById('sim-val').textContent=fmt(real)+' ₾';
-  document.getElementById('sim-cap').textContent=`ამის ტოლი მსყიდველობითი ძალა დარჩება ${yrs} წელიწადში`;
+  const sv=document.getElementById('sim-val');
+  sv.textContent=fmt(real)+' ₾';
+  sv.classList.add('hit');setTimeout(()=>sv.classList.remove('hit'),350);
+  document.getElementById('sim-cap').textContent=`ამის ტოლი მსყიდველობითი ძალა დაგრჩება ${new Date().getFullYear()+yrs} წელს`;
   const lost=Math.round((1-ratio)*100);
   document.getElementById('sim-compare').innerHTML=
-    `დანაზოგის <b>${lost}%</b> „უჩინრად" გაქრა — ეს არავის მოუპარავს ღიად: ის ახალი ფულის მბეჭდავთან გადავიდა.<br>
+    `დანაზოგის <b>${lost}%</b> „უჩინრად“ გაქრა — ეს არავის მოუპარავს ღიად: ის ახალი ფულის მბეჭდავთან გადავიდა.<br>
      მყარი ფულის სამყაროში (მიწოდება ფიქსირებულია) იგივე დანაზოგი <b>${fmt(amt)} ₾-ის ძალას</b> შეინარჩუნებდა.`;
 }
 ['amt','inf','yrs'].forEach(id=>document.getElementById(id).addEventListener('input',sim));
+function setPreset(inf){
+  document.getElementById('inf').value=inf;
+  sim();
+}
 sim();
+
+/* ───────────── certificate ───────────── */
+async function downloadCert(){
+  const name=(prompt('შენი სახელი და გვარი სერტიფიკატისთვის:')||'').trim();
+  if(!name)return;
+  await document.fonts.load('900 64px "Noto Serif Georgian"');
+  await document.fonts.load('300 26px "Noto Sans Georgian"');
+  const W=1600,H=1131;
+  const cv=document.createElement('canvas');cv.width=W;cv.height=H;
+  const x=cv.getContext('2d');
+  x.fillStyle='#080d1a';x.fillRect(0,0,W,H);
+  const g=x.createRadialGradient(W/2,H/2,100,W/2,H/2,900);
+  g.addColorStop(0,'rgba(201,161,59,.10)');g.addColorStop(1,'rgba(201,161,59,0)');
+  x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.strokeStyle='#c9a13b';x.lineWidth=3;x.strokeRect(60,60,W-120,H-120);
+  x.lineWidth=1;x.strokeRect(76,76,W-152,H-152);
+  x.textAlign='center';
+  x.fillStyle='#f0c75e';x.font='900 110px Georgia,serif';x.fillText('₿',W/2,210);
+  x.fillStyle='#97a0b8';x.font='300 24px "Noto Sans Georgian"';x.fillText('ს ე რ ტ ი ფ ი კ ა ტ ი',W/2,290);
+  x.fillStyle='#e9e2d0';x.font='900 58px "Noto Serif Georgian"';x.fillText('ბიტკოინ სტანდარტი',W/2,390);
+  x.fillStyle='#97a0b8';x.font='300 26px "Noto Sans Georgian"';x.fillText('ეს სერტიფიკატი ადასტურებს, რომ',W/2,490);
+  x.fillStyle='#f0c75e';x.font='700 64px "Noto Serif Georgian"';x.fillText(name,W/2,590);
+  x.fillStyle='#97a0b8';x.font='300 26px "Noto Sans Georgian"';
+  x.fillText('წარმატებით დაასრულა ინტერაქტიული კურსი',W/2,670);
+  x.fillText('„ფულის ისტორია და ბიტკოინის ეკონომიკა“ — 9 თავი · 57 გაკვეთილი · 72 კითხვა',W/2,720);
+  x.strokeStyle='rgba(201,161,59,.5)';x.beginPath();x.moveTo(W/2-200,800);x.lineTo(W/2+200,800);x.stroke();
+  x.fillStyle='#c9a13b';x.font='300 24px "Noto Sans Georgian"';
+  x.fillText(new Date().toLocaleDateString('ka-GE',{year:'numeric',month:'long',day:'numeric'}),W/2,860);
+  x.fillStyle='#5a6378';x.font='300 19px "Noto Sans Georgian"';
+  x.fillText('საიფედინ ამმუსის საერთაშორისო ბესტსელერის მიხედვით',W/2,H-130);
+  const a=document.createElement('a');
+  a.download='bitcoin-standard-certificate.png';
+  a.href=cv.toDataURL('image/png');
+  a.click();
+}
 
 /* ───────────── reveal on scroll ───────────── */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
