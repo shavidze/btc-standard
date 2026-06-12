@@ -200,6 +200,8 @@ h2.sec-title{font-family:var(--serif);font-weight:700;font-size:clamp(26px,3.4vw
 .slider-row label{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:10px}
 .slider-row label b{color:var(--gold-hi);font-weight:500;font-size:16px}
 input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:2px;background:#2a3354;outline:none}
+input[type=range]:focus-visible{outline:2px solid var(--gold-hi);outline-offset:4px}
+.ch-card:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
 input[type=range]::-webkit-slider-thumb{
   -webkit-appearance:none;width:20px;height:20px;border-radius:50%;cursor:pointer;
   background:radial-gradient(circle at 35% 35%,var(--gold-hi),var(--gold));
@@ -225,7 +227,7 @@ input[type=range]::-webkit-slider-thumb{
 .sim-compare b{color:var(--gold-hi);font-weight:500}
 
 /* ───── footer ───── */
-footer{padding:50px 0 70px;text-align:center;color:#5a6378;font-size:13px;border-top:1px solid rgba(201,161,59,.12);margin-top:40px}
+footer{padding:50px 0 70px;text-align:center;color:#7e89a3;font-size:13px;border-top:1px solid rgba(201,161,59,.12);margin-top:40px}
 footer .coin{font-family:var(--serif);color:var(--gold);font-size:22px;margin-bottom:12px}
 
 /* reveal animation */
@@ -262,7 +264,7 @@ footer .coin{font-family:var(--serif);color:var(--gold);font-size:22px;margin-bo
         <span id="prog-label">0%</span>
       </div>
     </div>
-    <div class="hero-art"><img src="images/cover.png" alt="ბიტკოინ სტანდარტი"></div>
+    <div class="hero-art"><img src="images/cover.webp" alt="ბიტკოინ სტანდარტი"></div>
   </div>
 </header>
 
@@ -354,15 +356,15 @@ footer .coin{font-family:var(--serif);color:var(--gold);font-size:22px;margin-bo
 <script>
 /* ───────────── chapter meta ───────────── */
 const CHAPTER_META=[
-  {img:'images/ch1.png',title:'ფული'},
-  {img:'images/ch2.png',title:'პრიმიტიული ფული'},
-  {img:'images/ch3.png',title:'მონეტარული ლითონები'},
-  {img:'images/ch4.png',title:'სახელმწიფო ფული'},
-  {img:'images/ch5.png',title:'ფული და დროის პრეფერენცია'},
-  {img:'images/ch6.png',title:'კაპიტალიზმის საინფორმაციო სისტემა'},
-  {img:'images/ch7.png',title:'მყარი ფული და თავისუფლება'},
-  {img:'images/ch8.jpg',title:'ციფრული ფული'},
-  {img:'images/ch9.jpg',title:'კითხვები ბიტკოინზე'},
+  {img:'images/ch1.webp',title:'ფული'},
+  {img:'images/ch2.webp',title:'პრიმიტიული ფული'},
+  {img:'images/ch3.webp',title:'მონეტარული ლითონები'},
+  {img:'images/ch4.webp',title:'სახელმწიფო ფული'},
+  {img:'images/ch5.webp',title:'ფული და დროის პრეფერენცია'},
+  {img:'images/ch6.webp',title:'კაპიტალიზმის საინფორმაციო სისტემა'},
+  {img:'images/ch7.webp',title:'მყარი ფული და თავისუფლება'},
+  {img:'images/ch8.webp',title:'ციფრული ფული'},
+  {img:'images/ch9.webp',title:'კითხვები ბიტკოინზე'},
 ];
 const CONTENT=window.COURSE_CONTENT||{};
 const PASS=6; /* 8-დან */
@@ -398,7 +400,13 @@ CHAPTER_META.forEach((c,idx)=>{
   d.innerHTML=`<img src="${c.img}" loading="lazy" alt="">
     <div class="body"><div class="no">თავი ${String(n).padStart(2,'0')}</div><h3>${c.title}</h3></div>
     <span class="badge-slot"></span><span class="mini-prog"></span>`;
-  if(has)d.onclick=()=>openChapter(n,true);
+  if(has){
+    d.onclick=()=>openChapter(n,true);
+    d.tabIndex=0;
+    d.setAttribute('role','button');
+    d.setAttribute('aria-label','თავი '+n+': '+c.title);
+    d.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openChapter(n,true)}};
+  }
   else d.querySelector('.badge-slot').outerHTML='<span class="lock">🔒 მალე</span>';
   grid.appendChild(d);
 });
@@ -419,6 +427,7 @@ let curCh=1,curLesson=0;
 const nav=document.getElementById('lesson-nav');
 
 function openChapter(n,scroll){
+  if(!CONTENT[n])return;
   curCh=n;
   const c=CONTENT[n];
   document.getElementById('lv-num').textContent='თავი '+n;
@@ -484,9 +493,11 @@ function renderQ(){
   document.getElementById('q-next').style.display='none';
   const box=document.getElementById('q-opts');
   box.innerHTML='';
-  q.opts.forEach((o,i)=>{
+  const order=[0,1,2,3].map(v=>({v,r:Math.random()})).sort((a,b)=>a.r-b.r).map(o=>o.v);
+  order.forEach(i=>{
     const b=document.createElement('button');
-    b.className='q-opt';b.textContent=o;
+    b.className='q-opt';b.textContent=q.opts[i];
+    b.dataset.orig=i;
     b.onclick=()=>answer(i,b);
     box.appendChild(b);
   });
@@ -497,7 +508,7 @@ function answer(i,btn){
   opts.forEach(b=>b.disabled=true);
   const bar=document.getElementById('q-progress').children[qIdx];
   if(i===q.a){btn.classList.add('correct');qScore++;bar.classList.add('done');}
-  else{btn.classList.add('incorrect');opts[q.a].classList.add('correct');bar.classList.add('wrong');}
+  else{btn.classList.add('incorrect');opts.find(b=>+b.dataset.orig===q.a).classList.add('correct');bar.classList.add('wrong');}
   const ex=document.getElementById('q-explain');
   ex.textContent=q.ex;ex.style.display='block';
   const nx=document.getElementById('q-next');
@@ -530,7 +541,7 @@ function showResult(){
 }
 
 /* ───────────── simulator ───────────── */
-const fmt=n=>n.toLocaleString('ka-GE',{maximumFractionDigits:0});
+const fmt=n=>n.toLocaleString('ka-GE',{maximumFractionDigits:0}).replace(/,/g,' ');
 function sim(){
   const amt=+document.getElementById('amt').value;
   const inf=+document.getElementById('inf').value;
