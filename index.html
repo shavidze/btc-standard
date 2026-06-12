@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ბიტკოინ სტანდარტი — ინტერაქტიული კურსი</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@400;600;700;900&family=Noto+Sans+Georgian:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080d1a;
+  --bg2:#0d1426;
+  --panel:#121a30;
+  --panel2:#18213c;
+  --gold:#c9a13b;
+  --gold-hi:#f0c75e;
+  --gold-dim:#7a6328;
+  --ink:#e9e2d0;
+  --muted:#97a0b8;
+  --green:#5fae6e;
+  --red:#c75b5b;
+  --serif:'Noto Serif Georgian',serif;
+  --sans:'Noto Sans Georgian',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.75;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+.wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+
+/* ───── hero ───── */
+header{position:relative;padding:70px 0 50px;overflow:hidden}
+header::after{
+  content:'';position:absolute;top:-200px;right:-150px;width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,161,59,.14),transparent 65%);pointer-events:none;
+}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+.kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;margin-bottom:22px;display:flex;align-items:center;gap:14px;
+}
+.kicker::before{content:'';width:44px;height:1px;background:var(--gold)}
+h1.title{
+  font-family:var(--serif);font-weight:900;font-size:clamp(38px,6vw,64px);
+  line-height:1.12;letter-spacing:-.01em;
+  background:linear-gradient(115deg,#f6e7bb 20%,var(--gold-hi) 45%,#9d7d2c 80%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:20px;
+}
+.subtitle{font-size:18px;color:var(--muted);max-width:30em;margin-bottom:36px}
+.subtitle b{color:var(--ink);font-weight:500}
+.cta{
+  display:inline-block;font-family:var(--serif);font-weight:700;font-size:17px;
+  color:#0a0f1e;background:linear-gradient(135deg,var(--gold-hi),var(--gold));
+  padding:15px 34px;border-radius:3px;text-decoration:none;letter-spacing:.02em;
+  box-shadow:0 0 0 1px rgba(240,199,94,.5),0 10px 38px rgba(201,161,59,.28);
+  transition:transform .25s,box-shadow .25s;
+}
+.cta:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(240,199,94,.8),0 16px 48px rgba(201,161,59,.42)}
+.hero-art{position:relative}
+.hero-art img{
+  width:100%;border-radius:4px;display:block;
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(201,161,59,.35);
+  transform:rotate(2deg);
+}
+.hero-art::before{
+  content:'';position:absolute;inset:-14px;border:1px solid rgba(201,161,59,.3);border-radius:6px;
+  transform:rotate(-1.5deg);pointer-events:none;
+}
+.progress-pill{
+  margin-top:28px;display:inline-flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);
+  border:1px solid rgba(201,161,59,.25);border-radius:99px;padding:8px 18px;background:rgba(18,26,48,.6);
+}
+.progress-pill .bar{width:130px;height:5px;border-radius:3px;background:#222b47;overflow:hidden}
+.progress-pill .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-hi));width:0%;transition:width .6s}
+
+/* ───── section headings ───── */
+section{padding:64px 0}
+.sec-head{display:flex;align-items:baseline;gap:20px;margin-bottom:38px}
+.sec-num{font-family:var(--serif);font-size:15px;color:var(--gold);letter-spacing:.2em;white-space:nowrap}
+h2.sec-title{font-family:var(--serif);font-weight:700;font-size:clamp(26px,3.4vw,36px);color:var(--ink)}
+.sec-head::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(201,161,59,.45),transparent)}
+
+/* ───── chapter grid ───── */
+.chapters{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.ch-card{
+  position:relative;border-radius:6px;overflow:hidden;background:var(--panel);
+  border:1px solid rgba(201,161,59,.16);cursor:pointer;
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+}
+.ch-card:hover{transform:translateY(-5px);border-color:rgba(201,161,59,.55);box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.ch-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;filter:saturate(.92)}
+.ch-card .body{padding:18px 20px 20px}
+.ch-card .no{font-family:var(--serif);font-size:12px;color:var(--gold);letter-spacing:.25em;margin-bottom:6px}
+.ch-card h3{font-family:var(--serif);font-weight:600;font-size:18px;line-height:1.35}
+.ch-card.locked{opacity:.45;cursor:default}
+.ch-card.locked:hover{transform:none;border-color:rgba(201,161,59,.16);box-shadow:none}
+.ch-card .lock{
+  position:absolute;top:12px;right:12px;font-size:11px;letter-spacing:.12em;
+  background:rgba(8,13,26,.78);border:1px solid rgba(201,161,59,.3);color:var(--gold);
+  padding:4px 12px;border-radius:99px;backdrop-filter:blur(4px);
+}
+.ch-card .done-badge{
+  position:absolute;top:12px;right:12px;font-size:11px;letter-spacing:.1em;
+  background:rgba(95,174,110,.16);border:1px solid rgba(95,174,110,.5);color:#8fd49c;
+  padding:4px 12px;border-radius:99px;
+}
+.ch-card .mini-prog{
+  position:absolute;bottom:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-hi));
+  transition:width .5s;
+}
+
+/* ───── lesson view ───── */
+#lesson-view{display:none}
+.lesson-shell{display:grid;grid-template-columns:240px 1fr;gap:40px;align-items:start}
+.lesson-nav{position:sticky;top:30px;border-left:1px solid rgba(201,161,59,.25);padding-left:0}
+.lesson-nav button{
+  display:block;width:100%;text-align:left;background:none;border:none;color:var(--muted);
+  font-family:var(--sans);font-size:14px;padding:10px 16px;cursor:pointer;
+  border-left:2px solid transparent;margin-left:-1px;transition:color .2s,border-color .2s;line-height:1.4;
+}
+.lesson-nav button:hover{color:var(--ink)}
+.lesson-nav button.active{color:var(--gold-hi);border-left-color:var(--gold)}
+.lesson-nav button.read::after{content:' ✓';color:var(--green)}
+.lesson-card{
+  background:linear-gradient(160deg,var(--panel),var(--panel2));
+  border:1px solid rgba(201,161,59,.2);border-radius:8px;padding:46px 52px;
+  box-shadow:0 24px 70px rgba(0,0,0,.45);
+}
+.lesson-card .l-kicker{font-size:11px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+.lesson-card h3{font-family:var(--serif);font-weight:700;font-size:28px;margin-bottom:22px;line-height:1.3}
+.lesson-card p{margin-bottom:16px;color:#cfd3df;font-size:16.5px}
+.lesson-card p b{color:var(--ink);font-weight:500}
+.lesson-card .drop::first-letter{
+  font-family:var(--serif);font-weight:900;font-size:54px;color:var(--gold-hi);
+  float:left;line-height:.85;padding:6px 12px 0 0;
+}
+.lesson-card .quote{
+  border-left:2px solid var(--gold);padding:6px 0 6px 22px;margin:26px 0;
+  font-family:var(--serif);font-size:17px;color:var(--gold-hi);font-style:italic;line-height:1.6;
+}
+.lesson-card ul{margin:0 0 16px 22px;color:#cfd3df}
+.lesson-card li{margin-bottom:8px;font-size:16px}
+.l-foot{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:24px;border-top:1px solid rgba(201,161,59,.15)}
+.l-foot .step{font-size:13px;color:var(--muted);letter-spacing:.08em}
+.btn{
+  font-family:var(--sans);font-weight:500;font-size:14.5px;cursor:pointer;border-radius:3px;
+  padding:11px 26px;transition:all .22s;letter-spacing:.02em;
+}
+.btn-gold{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#0a0f1e;border:none}
+.btn-gold:hover{filter:brightness(1.1)}
+.btn-ghost{background:none;border:1px solid rgba(201,161,59,.4);color:var(--gold-hi)}
+.btn-ghost:hover{border-color:var(--gold-hi);background:rgba(201,161,59,.08)}
+.btn:disabled{opacity:.3;cursor:default}
+
+/* ───── quiz ───── */
+#quiz-sec{display:none}
+.quiz-card{max-width:720px;margin:0 auto}
+.q-progress{display:flex;gap:6px;margin-bottom:30px}
+.q-progress i{flex:1;height:4px;border-radius:2px;background:#222b47;transition:background .3s}
+.q-progress i.done{background:var(--gold)}
+.q-progress i.wrong{background:var(--red)}
+.q-question{font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.45;margin-bottom:28px}
+.q-opts{display:grid;gap:12px}
+.q-opt{
+  text-align:left;background:rgba(18,26,48,.7);border:1px solid rgba(151,160,184,.25);
+  color:var(--ink);font-family:var(--sans);font-size:15.5px;font-weight:300;
+  padding:16px 22px;border-radius:5px;cursor:pointer;transition:all .2s;line-height:1.5;
+}
+.q-opt:hover{border-color:var(--gold);background:rgba(201,161,59,.07)}
+.q-opt.correct{border-color:var(--green);background:rgba(95,174,110,.12);color:#b9e3c1}
+.q-opt.incorrect{border-color:var(--red);background:rgba(199,91,91,.1);color:#e8b8b8}
+.q-opt:disabled{cursor:default}
+.q-explain{
+  display:none;margin-top:22px;padding:18px 22px;border-radius:5px;font-size:15px;
+  background:rgba(201,161,59,.07);border:1px solid rgba(201,161,59,.25);color:#d8cfae;
+}
+.q-result{text-align:center;display:none;padding:30px 0}
+.q-result .big{font-family:var(--serif);font-weight:900;font-size:64px;color:var(--gold-hi)}
+.q-result p{color:var(--muted);margin:10px 0 28px}
+
+/* ───── simulator ───── */
+.sim{
+  background:linear-gradient(160deg,var(--panel),#1a1530);
+  border:1px solid rgba(201,161,59,.25);border-radius:8px;padding:46px 52px;
+}
+.sim-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:50px;align-items:center}
+.slider-row{margin-bottom:30px}
+.slider-row label{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:10px}
+.slider-row label b{color:var(--gold-hi);font-weight:500;font-size:16px}
+input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:2px;background:#2a3354;outline:none}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:20px;height:20px;border-radius:50%;cursor:pointer;
+  background:radial-gradient(circle at 35% 35%,var(--gold-hi),var(--gold));
+  box-shadow:0 0 0 4px rgba(201,161,59,.2),0 4px 12px rgba(0,0,0,.5);
+}
+.sim-readout{text-align:center}
+.banknote{
+  position:relative;margin:0 auto 26px;width:300px;height:150px;border-radius:8px;
+  background:linear-gradient(135deg,#1f4a38,#173527);border:1px solid rgba(95,174,110,.5);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:900;font-size:40px;color:#a8d9b4;
+  transition:transform .5s cubic-bezier(.2,.8,.3,1),opacity .5s;transform-origin:center;
+  box-shadow:0 16px 44px rgba(0,0,0,.45);
+}
+.banknote::before,.banknote::after{
+  content:'₾';position:absolute;font-size:16px;opacity:.55;
+}
+.banknote::before{top:10px;left:16px}
+.banknote::after{bottom:10px;right:16px}
+.sim-val{font-family:var(--serif);font-weight:900;font-size:46px;color:var(--gold-hi);line-height:1.1}
+.sim-cap{font-size:14px;color:var(--muted);margin-top:8px}
+.sim-compare{margin-top:26px;font-size:14px;color:var(--muted);border-top:1px solid rgba(201,161,59,.15);padding-top:18px}
+.sim-compare b{color:var(--gold-hi);font-weight:500}
+
+/* ───── footer ───── */
+footer{padding:50px 0 70px;text-align:center;color:#5a6378;font-size:13px;border-top:1px solid rgba(201,161,59,.12);margin-top:40px}
+footer .coin{font-family:var(--serif);color:var(--gold);font-size:22px;margin-bottom:12px}
+
+/* reveal animation */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr}
+  .hero-art{max-width:340px;margin:0 auto}
+  .chapters{grid-template-columns:1fr 1fr}
+  .lesson-shell{grid-template-columns:1fr}
+  .lesson-nav{position:static;display:flex;overflow-x:auto;border-left:none;border-bottom:1px solid rgba(201,161,59,.25);margin-bottom:18px}
+  .lesson-nav button{white-space:nowrap;border-left:none;border-bottom:2px solid transparent}
+  .lesson-nav button.active{border-bottom-color:var(--gold)}
+  .lesson-card{padding:30px 26px}
+  .sim{padding:30px 26px}
+  .sim-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){.chapters{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hero">
+    <div>
+      <div class="kicker">ინტერაქტიული კურსი · ქართულად</div>
+      <h1 class="title">ბიტკოინ<br>სტანდარტი</h1>
+      <p class="subtitle">ისწავლე <b>ფულის ისტორია და ბიტკოინის ეკონომიკა</b> — საიფედინ ამმუსის წიგნზე დაფუძნებული გაკვეთილებით, ქვიზებითა და სიმულაციებით. უფასოდ, შენი ტემპით.</p>
+      <a class="cta" href="#chapters-sec">დაიწყე სწავლა →</a>
+      <div class="progress-pill">
+        <span>შენი პროგრესი</span>
+        <span class="bar"><i id="prog-bar"></i></span>
+        <span id="prog-label">0%</span>
+      </div>
+    </div>
+    <div class="hero-art"><img src="images/cover.png" alt="ბიტკოინ სტანდარტი"></div>
+  </div>
+</header>
+
+<!-- ───────── chapters ───────── -->
+<section id="chapters-sec">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">I</span><h2 class="sec-title">თავები</h2></div>
+    <div class="chapters" id="chapter-grid"></div>
+  </div>
+</section>
+
+<!-- ───────── lesson view ───────── -->
+<section id="lesson-view">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num" id="lv-num">თავი 1</span><h2 class="sec-title" id="lv-title">ფული</h2></div>
+    <div class="lesson-shell">
+      <nav class="lesson-nav" id="lesson-nav"></nav>
+      <div>
+        <div class="lesson-card" id="lesson-card"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── quiz ───────── -->
+<section id="quiz-sec">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">✦</span><h2 class="sec-title" id="qv-title">გამოცდა</h2></div>
+    <div class="lesson-card quiz-card">
+      <div class="q-progress" id="q-progress"></div>
+      <div id="q-body">
+        <div class="q-question" id="q-question"></div>
+        <div class="q-opts" id="q-opts"></div>
+        <div class="q-explain" id="q-explain"></div>
+        <div class="l-foot" style="border:none;margin-top:26px;padding-top:0">
+          <span class="step" id="q-step"></span>
+          <button class="btn btn-gold" id="q-next" style="display:none">შემდეგი →</button>
+        </div>
+      </div>
+      <div class="q-result" id="q-result">
+        <div class="big" id="q-score"></div>
+        <p id="q-verdict"></p>
+        <button class="btn btn-ghost" onclick="startQuiz()">თავიდან ცდა</button>
+        <button class="btn btn-gold" id="q-onward"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── simulator ───────── -->
+<section id="sim-sec">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">II</span><h2 class="sec-title">ინფლაციის მანქანა</h2></div>
+    <div class="sim">
+      <p style="color:var(--muted);max-width:42em;margin-bottom:34px">წიგნის მთავარი გაკვეთილი ციფრებში: რა ემართება შენს დანაზოგს, როცა ფული „რბილია". გაასრიალე და ნახე.</p>
+      <div class="sim-grid">
+        <div>
+          <div class="slider-row">
+            <label><span>დანაზოგი დღეს</span><b id="amt-label">1 000 ₾</b></label>
+            <input type="range" id="amt" min="100" max="10000" step="100" value="1000">
+          </div>
+          <div class="slider-row">
+            <label><span>წლიური ინფლაცია</span><b id="inf-label">10%</b></label>
+            <input type="range" id="inf" min="1" max="50" step="1" value="10">
+          </div>
+          <div class="slider-row">
+            <label><span>წლების შემდეგ</span><b id="yrs-label">10 წელი</b></label>
+            <input type="range" id="yrs" min="1" max="30" step="1" value="10">
+          </div>
+        </div>
+        <div class="sim-readout">
+          <div class="banknote" id="banknote">1000 ₾</div>
+          <div class="sim-val" id="sim-val"></div>
+          <div class="sim-cap" id="sim-cap"></div>
+          <div class="sim-compare" id="sim-compare"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="coin">₿</div>
+  პროტოტიპი · დაფუძნებულია საიფედინ ამმუსის „ბიტკოინ სტანდარტზე"<br>
+  საგანმანათლებლო მიზნებისთვის
+</footer>
+
+<script src="content.js"></script>
+<script>
+/* ───────────── chapter meta ───────────── */
+const CHAPTER_META=[
+  {img:'images/ch1.png',title:'ფული'},
+  {img:'images/ch2.png',title:'პრიმიტიული ფული'},
+  {img:'images/ch3.png',title:'მონეტარული ლითონები'},
+  {img:'images/ch4.png',title:'სახელმწიფო ფული'},
+  {img:'images/ch5.png',title:'ფული და დროის პრეფერენცია'},
+  {img:'images/ch6.png',title:'კაპიტალიზმის საინფორმაციო სისტემა'},
+  {img:'images/ch7.png',title:'მყარი ფული და თავისუფლება'},
+  {img:'images/ch8.jpg',title:'ციფრული ფული'},
+  {img:'images/ch9.jpg',title:'კითხვები ბიტკოინზე'},
+];
+const CONTENT=window.COURSE_CONTENT||{};
+const PASS=6; /* 8-დან */
+
+/* ───────────── state ───────────── */
+const store={
+  read(ch){return new Set(JSON.parse(localStorage.getItem('bs_read_'+ch)||'[]'))},
+  markRead(ch,i){const s=this.read(ch);s.add(i);localStorage.setItem('bs_read_'+ch,JSON.stringify([...s]))},
+  quizBest(ch){return +localStorage.getItem('bs_quiz_'+ch)||0},
+  setQuiz(ch,v){localStorage.setItem('bs_quiz_'+ch,Math.max(v,this.quizBest(ch)))},
+  chDone(ch){const c=CONTENT[ch];return c&&this.read(ch).size>=c.lessons.length&&this.quizBest(ch)>=PASS},
+};
+
+function updateProgress(){
+  let total=0,done=0;
+  for(const ch in CONTENT){
+    total+=CONTENT[ch].lessons.length+1;
+    done+=Math.min(store.read(ch).size,CONTENT[ch].lessons.length)+(store.quizBest(ch)>=PASS?1:0);
+  }
+  const pct=total?Math.round(done/total*100):0;
+  document.getElementById('prog-bar').style.width=pct+'%';
+  document.getElementById('prog-label').textContent=pct+'%';
+  renderBadges();
+}
+
+/* ───────────── chapters grid ───────────── */
+const grid=document.getElementById('chapter-grid');
+CHAPTER_META.forEach((c,idx)=>{
+  const n=idx+1,has=!!CONTENT[n];
+  const d=document.createElement('div');
+  d.className='ch-card reveal'+(has?'':' locked');
+  d.dataset.ch=n;
+  d.innerHTML=`<img src="${c.img}" loading="lazy" alt="">
+    <div class="body"><div class="no">თავი ${String(n).padStart(2,'0')}</div><h3>${c.title}</h3></div>
+    <span class="badge-slot"></span><span class="mini-prog"></span>`;
+  if(has)d.onclick=()=>openChapter(n,true);
+  else d.querySelector('.badge-slot').outerHTML='<span class="lock">🔒 მალე</span>';
+  grid.appendChild(d);
+});
+function renderBadges(){
+  document.querySelectorAll('.ch-card').forEach(card=>{
+    const n=+card.dataset.ch;
+    if(!CONTENT[n])return;
+    const slot=card.querySelector('.badge-slot');
+    if(slot)slot.outerHTML=store.chDone(n)?'<span class="done-badge">✓ დასრულდა</span>':'<span class="badge-slot"></span>';
+    const c=CONTENT[n],steps=c.lessons.length+1;
+    const done=Math.min(store.read(n).size,c.lessons.length)+(store.quizBest(n)>=PASS?1:0);
+    card.querySelector('.mini-prog').style.width=(done/steps*100)+'%';
+  });
+}
+
+/* ───────────── lesson view ───────────── */
+let curCh=1,curLesson=0;
+const nav=document.getElementById('lesson-nav');
+
+function openChapter(n,scroll){
+  curCh=n;
+  const c=CONTENT[n];
+  document.getElementById('lv-num').textContent='თავი '+n;
+  document.getElementById('lv-title').textContent=CHAPTER_META[n-1].title;
+  document.getElementById('lesson-view').style.display='block';
+  document.getElementById('quiz-sec').style.display='none';
+  nav.innerHTML='';
+  c.lessons.forEach((l,i)=>{
+    const b=document.createElement('button');
+    b.textContent=l.nav;
+    b.onclick=()=>showLesson(i);
+    nav.appendChild(b);
+  });
+  showLesson(0);
+  if(scroll)document.getElementById('lesson-view').scrollIntoView({behavior:'smooth'});
+}
+
+function showLesson(i){
+  curLesson=i;
+  const c=CONTENT[curCh];
+  store.markRead(curCh,i);
+  updateProgress();
+  [...nav.children].forEach((b,j)=>{
+    b.classList.toggle('active',j===i);
+    b.classList.toggle('read',store.read(curCh).has(j));
+  });
+  const l=c.lessons[i],last=i===c.lessons.length-1;
+  document.getElementById('lesson-card').innerHTML=`
+    <div class="l-kicker">გაკვეთილი ${i+1} / ${c.lessons.length}</div>
+    <h3>${l.title}</h3>
+    ${l.html}
+    <div class="l-foot">
+      <button class="btn btn-ghost" ${i===0?'disabled':''} onclick="showLesson(${i-1})">← წინა</button>
+      <span class="step">${i+1} / ${c.lessons.length}</span>
+      ${last
+        ?`<button class="btn btn-gold" onclick="openQuiz()">გამოცდაზე →</button>`
+        :`<button class="btn btn-gold" onclick="showLesson(${i+1})">შემდეგი →</button>`}
+    </div>`;
+  document.getElementById('lesson-view').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ───────────── quiz ───────────── */
+let qIdx=0,qScore=0;
+function openQuiz(){
+  document.getElementById('quiz-sec').style.display='block';
+  document.getElementById('qv-title').textContent='გამოცდა — თავი '+curCh;
+  startQuiz();
+  document.getElementById('quiz-sec').scrollIntoView({behavior:'smooth'});
+}
+function startQuiz(){
+  qIdx=0;qScore=0;
+  document.getElementById('q-body').style.display='block';
+  document.getElementById('q-result').style.display='none';
+  const p=document.getElementById('q-progress');
+  p.innerHTML=CONTENT[curCh].quiz.map(()=>'<i></i>').join('');
+  renderQ();
+}
+function renderQ(){
+  const quiz=CONTENT[curCh].quiz,q=quiz[qIdx];
+  document.getElementById('q-question').textContent=q.q;
+  document.getElementById('q-step').textContent=`კითხვა ${qIdx+1} / ${quiz.length}`;
+  document.getElementById('q-explain').style.display='none';
+  document.getElementById('q-next').style.display='none';
+  const box=document.getElementById('q-opts');
+  box.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='q-opt';b.textContent=o;
+    b.onclick=()=>answer(i,b);
+    box.appendChild(b);
+  });
+}
+function answer(i,btn){
+  const quiz=CONTENT[curCh].quiz,q=quiz[qIdx];
+  const opts=[...document.querySelectorAll('.q-opt')];
+  opts.forEach(b=>b.disabled=true);
+  const bar=document.getElementById('q-progress').children[qIdx];
+  if(i===q.a){btn.classList.add('correct');qScore++;bar.classList.add('done');}
+  else{btn.classList.add('incorrect');opts[q.a].classList.add('correct');bar.classList.add('wrong');}
+  const ex=document.getElementById('q-explain');
+  ex.textContent=q.ex;ex.style.display='block';
+  const nx=document.getElementById('q-next');
+  nx.style.display='inline-block';
+  nx.textContent=qIdx===quiz.length-1?'შედეგი →':'შემდეგი →';
+  nx.onclick=()=>{qIdx++;qIdx<quiz.length?renderQ():showResult();};
+}
+function showResult(){
+  const quiz=CONTENT[curCh].quiz;
+  store.setQuiz(curCh,qScore);
+  updateProgress();
+  document.getElementById('q-body').style.display='none';
+  const r=document.getElementById('q-result');
+  r.style.display='block';
+  document.getElementById('q-score').textContent=`${qScore} / ${quiz.length}`;
+  const v=document.getElementById('q-verdict');
+  v.textContent=qScore===quiz.length?'შესანიშნავია! მყარი ცოდნა გაქვს — სატოში იამაყებდა. 🏆'
+    :qScore>=PASS?'ძალიან კარგი! ეს თავი ათვისებულია.'
+    :qScore>=4?'კარგი დასაწყისია — გადაიკითხე გაკვეთილები და კიდევ სცადე.'
+    :'ჯერ ადრეა — დაუბრუნდი გაკვეთილებს და თავიდან სცადე.';
+  const onward=document.getElementById('q-onward');
+  const next=curCh+1;
+  if(CONTENT[next]){
+    onward.textContent=`თავი ${next}: ${CHAPTER_META[next-1].title} →`;
+    onward.onclick=()=>openChapter(next,true);
+  }else{
+    onward.textContent='სიმულაციაზე გადასვლა →';
+    onward.onclick=()=>document.getElementById('sim-sec').scrollIntoView({behavior:'smooth'});
+  }
+}
+
+/* ───────────── simulator ───────────── */
+const fmt=n=>n.toLocaleString('ka-GE',{maximumFractionDigits:0});
+function sim(){
+  const amt=+document.getElementById('amt').value;
+  const inf=+document.getElementById('inf').value;
+  const yrs=+document.getElementById('yrs').value;
+  document.getElementById('amt-label').textContent=fmt(amt)+' ₾';
+  document.getElementById('inf-label').textContent=inf+'%';
+  document.getElementById('yrs-label').textContent=yrs+' წელი';
+  const real=amt/Math.pow(1+inf/100,yrs);
+  const ratio=real/amt;
+  const note=document.getElementById('banknote');
+  note.textContent=fmt(amt)+' ₾';
+  note.style.transform=`scale(${.35+.65*ratio})`;
+  note.style.opacity=.35+.65*ratio;
+  document.getElementById('sim-val').textContent=fmt(real)+' ₾';
+  document.getElementById('sim-cap').textContent=`ამის ტოლი მსყიდველობითი ძალა დარჩება ${yrs} წელიწადში`;
+  const lost=Math.round((1-ratio)*100);
+  document.getElementById('sim-compare').innerHTML=
+    `დანაზოგის <b>${lost}%</b> „უჩინრად" გაქრა — ეს არავის მოუპარავს ღიად: ის ახალი ფულის მბეჭდავთან გადავიდა.<br>
+     მყარი ფულის სამყაროში (მიწოდება ფიქსირებულია) იგივე დანაზოგი <b>${fmt(amt)} ₾-ის ძალას</b> შეინარჩუნებდა.`;
+}
+['amt','inf','yrs'].forEach(id=>document.getElementById(id).addEventListener('input',sim));
+sim();
+
+/* ───────────── reveal on scroll ───────────── */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3*90)+'ms';io.observe(el)});
+
+updateProgress();
+</script>
+</body>
+</html>
