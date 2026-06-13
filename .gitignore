@@ -1,2 +1,4 @@
 content/.backup/
 __pycache__/
+.gstack/
+_pycache_/
