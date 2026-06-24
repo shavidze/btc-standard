@@ -102,6 +102,7 @@ def improve_json(path, label):
     json.dump(data, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"{label}: OK", flush=True)
 
+
 JOBS = [
     ("01. Money.md", "ch1.json", "თავი 1 (ფული)"),
     ("02. Primitive Moneys.md", "ch2.json", "თავი 2 (პრიმიტიული ფული)"),
